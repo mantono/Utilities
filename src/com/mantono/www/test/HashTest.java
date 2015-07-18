@@ -18,10 +18,17 @@ public class HashTest
 	}
 
 	@Test
+	public void testHashCodeConstructorFromString() throws NoSuchAlgorithmException
+	{
+		Hash strHash = new Hash("7d9b13fcb8dc6d931bb9d33c134b79d0db697ed2673b874bbd010dab2d139cd4b900556f67622812538a171bc7768dabc1eb39843803850c9fb0fbfb575aa4cc");
+		Hash byteHash = new Hash("test", "#d0g:7ih]Wp@4NrZ");
+		assertEquals(strHash, byteHash);
+	}
+	
+	@Test
 	public void testHashCode() throws NoSuchAlgorithmException
 	{
 		Hash output = new Hash("test", "someSalt", "SHA-256");
-		System.out.println(output);
 		assertEquals(386, output.hashCode());
 	}
 

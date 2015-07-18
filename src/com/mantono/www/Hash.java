@@ -80,9 +80,7 @@ public final class Hash
 	{
 		StringBuilder result = new StringBuilder();
 		for(byte b : bytes)
-		{
 			result.append(b + " ");
-		}
 		return result.toString();
 	}
 	
@@ -110,9 +108,7 @@ public final class Hash
 	{
 		int i = 0;
 		for(byte b : bytes)
-		{
 			i += b;
-		}
 		return i;
 	}
 
