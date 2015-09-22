@@ -1,4 +1,4 @@
-package com.mantono.www;
+package com.mantono.security;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -6,6 +6,10 @@ import java.security.SecureRandom;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.mantono.Database;
+import com.mantono.Email;
+import com.mantono.InvalidEmailException;
 
 public class AccountManager
 {

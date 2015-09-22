@@ -1,4 +1,4 @@
-package com.mantono.www.test;
+package com.mantono;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,8 @@ import java.time.DayOfWeek;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mantono.www.Date;
+import com.mantono.time.Date;
+import com.mantono.time.Time;
 
 public class DateTest
 {
@@ -280,7 +281,4 @@ public class DateTest
 		final Date aug02_2015 = new Date(2015, 8, 2, 15, 0, 0);
 		assertEquals(DayOfWeek.SUNDAY, aug02_2015.getDayOfWeek());
 	}
-	
-	
-
 }

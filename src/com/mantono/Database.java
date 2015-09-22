@@ -1,4 +1,4 @@
-package com.mantono.www;
+package com.mantono;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

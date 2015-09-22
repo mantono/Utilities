@@ -1,4 +1,4 @@
-package com.mantono.www;
+package com.mantono;
 
 public class InvalidEmailException extends RuntimeException
 {

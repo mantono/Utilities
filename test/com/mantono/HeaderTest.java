@@ -1,4 +1,4 @@
-package com.mantono.www.test;
+package com.mantono;
 
 import static org.junit.Assert.*;
 

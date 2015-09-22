@@ -1,8 +1,10 @@
-package com.mantono.www;
+package com.mantono.time;
 
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.Month;
+
+import org.hamcrest.core.SubstringMatcher;
 
 public class Date implements Comparable<Date>
 {
@@ -120,7 +122,7 @@ public class Date implements Comparable<Date>
 	public long getDifference()
 	{
 		long unixTime = System.currentTimeMillis() / 1000L;
-		return (int) (unixTime - timestamp);
+		return unixTime - timestamp;
 	}
 	
 	public long getTime()
@@ -133,34 +135,14 @@ public class Date implements Comparable<Date>
 		return new Timestamp(timestamp*1000);
 	}
 	
-	public String getHumanReadable()
+	public String humanReadable()
 	{
-		int days = (int)(getDifference() / DAY);
-		int hours = (int)((getDifference() % DAY) / 3600);
-		int minutes = Math.round((getDifference() % 3600) / 60);
-		String time = "";
-		if(days != 0)
-		{
-			time = days + " day";
-			if(days > 1 || days < -1)
-				time += "s";
-		}
-		else if(hours != 0 )
-		{
-			time = hours + " hour";
-			if(hours > 1 || hours < -1)
-				time += "s";
-		}
-		else if(minutes != 0 )
-		{
-			time = minutes + " minute";
-			if(minutes > 1 || minutes < -1)
-				time += "s";
-		}
-		else
-			time = "0";
-
-		return time;
+		return Time.humanReadable(timestamp);
+	}
+	
+	public String humanReadableDetailed()
+	{
+		return Time.humanReadableDetailed(timestamp);
 	}
 
 	public int compareTo(Date other)
@@ -204,21 +186,6 @@ public class Date implements Comparable<Date>
 		if(isLeapYear(year))
 			return 29;
 		return 28;
-	}
-	
-	private long subtractYears()
-	{
-		int year = 1970;
-		long time = timestamp;
-		while(time > YEAR)
-		{
-			if(isLeapYear(year))
-				time -= LEAP_YEAR;
-			else
-				time -= YEAR;
-			year++;
-		}
-		return time;		
 	}
 	
 	private long subtractMonths()

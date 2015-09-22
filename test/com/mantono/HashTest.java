@@ -1,4 +1,4 @@
-package com.mantono.www.test;
+package com.mantono;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.mantono.www.Hash;
+import com.mantono.security.Hash;
 
 public class HashTest
 {

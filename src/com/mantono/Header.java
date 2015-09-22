@@ -1,4 +1,4 @@
-package com.mantono.www;
+package com.mantono;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.mantono.www;
+package com.mantono.security;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -106,9 +106,9 @@ public final class Hash
 	@Override
 	public int hashCode()
 	{
-		int i = 0;
+		int i = 1;
 		for(byte b : bytes)
-			i += b;
+			i += i * 11 + b;
 		return i;
 	}
 

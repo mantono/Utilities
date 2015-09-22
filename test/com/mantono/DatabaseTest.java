@@ -1,4 +1,4 @@
-package test;
+package com.mantono;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mantono.www.Database;
+import com.mantono.Database;
 
 public class DatabaseTest
 {

@@ -1,6 +1,8 @@
-package com.mantono.www;
+package com.mantono.security;
 
 import java.security.SecureRandom;
+
+import com.mantono.time.Date;
 
 public class Delayer implements Runnable
 {
@@ -8,11 +10,12 @@ public class Delayer implements Runnable
 	private Date timeForLastLoginAttempt = new Date();
 	private final SecureRandom randomNumber = new SecureRandom();
 	private long loginAttempts = 0;
+	private boolean continueDecay = true;
 	
 	@Override
 	public void run()
 	{
-		while(true)
+		while(continueDecay)
 		{
 			final long timeSinceLastLoginAttempt = timeForLastLoginAttempt.getDifference(); 
 			if(timeSinceLastLoginAttempt > Date.DAY)
@@ -25,7 +28,6 @@ public class Delayer implements Runnable
 				loginAttempts = 0;
 			try
 			{
-				System.out.println(loginAttempts);
 				Thread.sleep(ONEMINUTE);
 			}
 			catch(InterruptedException e)
@@ -33,6 +35,11 @@ public class Delayer implements Runnable
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public synchronized void kill()
+	{
+		continueDecay = false;
 	}
 	
 	protected long getLoginAttempts()

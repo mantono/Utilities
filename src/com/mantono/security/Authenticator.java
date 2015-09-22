@@ -1,21 +1,20 @@
-package com.mantono.www;
-
-import gymconnector.DatabaseHandle;
+package com.mantono.security;
 
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.mantono.Database;
 
 public class Authenticator
 {
 	private final Database database;
 	private final Delayer delay = new Delayer();
 	
-	public Authenticator() throws SQLException
+	public Authenticator(Database database) throws SQLException
 	{
-		this.database = new DatabaseHandle();
+		this.database = database;
 		Thread delayThread = new Thread(delay);
 		delayThread.start();
 	}
@@ -26,7 +25,7 @@ public class Authenticator
 		Hash fromDatabase = getHashInDatabaseForUser(username);
 		String salt = getSaltInDatabaseForUser(username);
 		Hash fromInput = new Hash(password, salt, "SHA-512");
-		delay.waitRandomTime(100);
+		delay.waitRandomTime(200);
 		System.out.println(delay.getLoginAttempts());
 		return isValid(fromDatabase, fromInput);
 	}
