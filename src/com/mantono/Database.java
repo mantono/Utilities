@@ -45,6 +45,11 @@ public class Database
 	{
 		return connection.prepareStatement(query);
 	}
+
+	public Connection getConnection()
+	{
+		return connection;
+	}
 	
 	public static synchronized int getNumberOfOpenConnections()
 	{

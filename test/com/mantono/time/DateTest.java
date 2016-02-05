@@ -1,4 +1,4 @@
-package com.mantono;
+package com.mantono.time;
 
 import static org.junit.Assert.*;
 

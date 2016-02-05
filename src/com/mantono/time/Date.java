@@ -1,28 +1,41 @@
 package com.mantono.time;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.Month;
+import java.util.concurrent.TimeUnit;
 
 import org.hamcrest.core.SubstringMatcher;
 
-public class Date implements Comparable<Date>
+public class Date implements Comparable<Date>, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8151256814932765592L;
 	public static final short HOUR = 3600;
 	public static final int DAY = 86_400;
 	public static final int WEEK = 604_800;
 	public static final int YEAR = 31_536_000;
 	public static final int LEAP_YEAR = 31_622_400;
 	private final long timestamp;
+	private final TimeUnit timeUnit;
+	
+	public Date(final long timestamp, TimeUnit timeUnit)
+	{
+		this.timestamp = timestamp;
+		this.timeUnit = timeUnit;
+	}
+	
+	public Date(final long timestamp)
+	{
+		this(timestamp, TimeUnit.SECONDS);
+	}
 	
 	public Date()
 	{
-		this.timestamp = System.currentTimeMillis() / 1000L;
-	}
-	
-	public Date(long timestamp)
-	{
-		this.timestamp = timestamp;
+		this(System.currentTimeMillis() / 1000L);
 	}
 	
 	public Date(Timestamp timestamp)
@@ -47,6 +60,7 @@ public class Date implements Comparable<Date>
 		accumulatedTime += minute*60;
 		accumulatedTime += second;
 		this.timestamp = accumulatedTime;
+		this.timeUnit = TimeUnit.SECONDS;
 	}
 	
 	private void checkForIllegalDate(int year, int month, int day, int hour, int minute, int second)

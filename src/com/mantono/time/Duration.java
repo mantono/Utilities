@@ -1,6 +1,5 @@
 package com.mantono.time;
 
-
 public class Duration implements Comparable<Duration>
 {
 	private final Date start;
@@ -16,36 +15,68 @@ public class Duration implements Comparable<Duration>
 		timeSpan = end.getTime() - start.getTime();
 	}
 
-	Date getStart()
+	public Duration(Date start, long timeSpan)
+	{
+		if(timeSpan < 0)
+			throw new IllegalArgumentException("Timespan can not be negative! (" + timeSpan + ")");
+		this.start = start;
+		this.end = new Date(start.getTime() + timeSpan);
+		this.timeSpan = timeSpan;
+	}
+	
+	public Duration(long timeSpan, Date end)
+	{
+		if(timeSpan < 0)
+			throw new IllegalArgumentException("Timespan can not be negative! (" + timeSpan + ")");
+		this.end = end;
+		this.start = new Date(end.getTime() - timeSpan);
+		this.timeSpan = timeSpan;
+	}
+
+	public Date getStart()
 	{
 		return start;
 	}
 
-	Date getEnd()
+	public Date getEnd()
 	{
 		return end;
 	}
 
-	long getTime()
+	public long getTime()
 	{
 		return timeSpan;
 	}
-	
-	long getMinutes()
+
+	public long getMinutes()
 	{
 		return timeSpan / 60;
 	}
-	
-	long getHours()
+
+	public long getHours()
 	{
 		return timeSpan / Date.HOUR;
 	}
-	
-	int getDays()
+
+	public int getDays()
 	{
 		return (int) (timeSpan / Date.DAY);
 	}
-	
+
+	public boolean hasStarted()
+	{
+		return start.getDifference() >= 0;
+	}
+
+	public boolean hasEnded()
+	{
+		return end.getDifference() > 0;
+	}
+
+	public boolean isNow()
+	{
+		return hasStarted() && !hasEnded();
+	}
 
 	@Override
 	public int compareTo(Duration other)
@@ -55,13 +86,13 @@ public class Duration implements Comparable<Duration>
 			return (int) (end.getTime() - other.end.getTime());
 		return diff;
 	}
-	
+
 	@Override
 	public String toString()
 	{
 		return Time.humanReadable(timeSpan);
 	}
-	
+
 	public boolean overlap(Duration other)
 	{
 		if(this.start.compareTo(other.end) > 0)

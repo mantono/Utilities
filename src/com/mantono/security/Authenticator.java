@@ -1,5 +1,6 @@
 package com.mantono.security;
 
+import java.net.PasswordAuthentication;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,6 +29,11 @@ public class Authenticator
 		delay.waitRandomTime(200);
 		System.out.println(delay.getLoginAttempts());
 		return isValid(fromDatabase, fromInput);
+	}
+	
+	public boolean permitLogin(PasswordAuthentication auth) throws NoSuchAlgorithmException
+	{
+		return permitLogin(auth.getUserName(), String.copyValueOf(auth.getPassword()));		
 	}
 
 	private boolean isValid(Hash fromDatabase, Hash fromInput)
